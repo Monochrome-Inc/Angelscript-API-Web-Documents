@@ -139,3 +139,4 @@ Type                | Description
 `yumi` | Grabs any player with `Yumi` character.
 `mike` | Grabs any player with `Mike` character.
 `diego` | Grabs any player with `Diego` character.
+`elijah` | Grabs any player with `Elijah` character.
