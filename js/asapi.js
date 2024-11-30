@@ -11,6 +11,7 @@ var langs = {
 	'schinese': '简体中文 (Simplified Chinese)',
 	'tchinese': '繁體中文 (Traditional Chinese)'
 };
+// TODO: Change these to local hosted flags instead.
 var lang_flag = {
 	'english': '//upload.wikimedia.org/wikipedia/en/a/a4/Flag_of_the_United_States.svg',
 	'schinese': '//upload.wikimedia.org/wikipedia/commons/f/fa/Flag_of_the_People%27s_Republic_of_China.svg',
