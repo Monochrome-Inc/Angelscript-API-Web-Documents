@@ -189,9 +189,15 @@
 		$value = "";
 		
 		if ( $input == "map" )
-			$value = '<span class="value">map plugins</span>!';
+			$value = '<span class="value">map scripts</span>!';
 		elseif ( $input == "plugin" )
-			$value = '<span class="value">server plugins</span>!';
+			$value = '<span class="value">server scripts</span>!';
+		elseif ( $input == "plugin_shared" )
+			$value = '<span class="value">server & client scripts</span>!';
+		elseif ( $input == "client" )
+			$value = '<span class="value">client scripts</span>!';
+		elseif ( $input == "server" )
+			$value = '<span class="value">map & server scripts</span>!';
 		else
 		{
 			$chars = preg_split('/=/', $input, -1, PREG_SPLIT_OFFSET_CAPTURE);

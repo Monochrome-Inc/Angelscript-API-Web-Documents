@@ -1,19 +1,11 @@
 <?php
 session_start();
 
+	$IsDebug = false;
 	if ( !empty( $_GET['debug'] ) )
+	{
 		var_dump($_GET);
-
-	// TODO: use an array instead??? because this is ugly...
-	// Our _GET for special docs
-	if ( isset( $_GET['scriptable_weapons'] ) )
-	{
-		require_once 'custom_weapons.php';
-		return;
-	} else if ( isset( $_GET['sequence_files'] ) )
-	{
-		require_once 'sequence_files.php';
-		return;
+		$IsDebug = true;
 	}
 
 	// Functions
@@ -21,8 +13,48 @@ session_start();
 	// Markdown
 	require_once 'Michelf/MarkdownExtra.inc.php';
 	// Get Markdown class
+	use Michelf\Markdown;
 	use Michelf\MarkdownExtra;
-	
+
+	// Our _GET for special docs
+	if ( isset( $_GET ) )
+	{
+		$FileFound = false;
+		$filename = array_key_first( $_GET );
+		$file = $_SERVER['DOCUMENT_ROOT'] . '/api/contagion/lib/extras/'. $filename . '.md';
+		if ( isset( $_POST['lang'] ) )
+			$file_lang = $_SERVER['DOCUMENT_ROOT'] . '/api/contagion/lib/lang/' . $_SESSION["lang"] . '/extras/'. $filename . '.md';
+		else
+			$file_lang = $_SERVER['DOCUMENT_ROOT'] . '/api/contagion/lib/extras/.md';
+		$file_lang = str_replace( "/api/api", "/api", $file_lang );
+		$file = str_replace( "/api/api", "/api", $file );
+		$text = "";
+		if ( file_exists( $file_lang ) )
+		{
+			$FileFound = true;
+			$text = '../lib/lang/' . $_SESSION["lang"] . '/extras/'. $filename . '.md';
+		}
+		else
+		{
+			if ( file_exists( $file ) )
+			{
+				$FileFound = true;
+				$text = '../lib/extras/'. $filename . '.md';
+			}
+			else
+			{
+				if ( $IsDebug )
+					echo '<p>Failed to read the file: ' . $filename . '</p><br>';
+			}
+		}
+		if ( $FileFound )
+		{
+			echo MarkdownExtra::defaultTransform( file_get_contents( $text ) );
+			LoadScripts();
+			return;
+		}
+	}
+
 	// No error reporting
 //	error_reporting(0);
 	
@@ -117,6 +149,8 @@ if ( $Get_Function != "" )
 {
 	if ( $JsonData['restrict'] )
 		echo RestrictNotify( $JsonData['restrict'] );
+	else if ( $jsonInfo['categories'][$Get_Category][$Get_Page]['restrict'] )
+		echo RestrictNotify( $jsonInfo['categories'][$Get_Category][$Get_Page]['restrict'] );
 ?>
 <h1 class="basecontent-header"><?php echo $FunctionName; ?></h1>
 <div>

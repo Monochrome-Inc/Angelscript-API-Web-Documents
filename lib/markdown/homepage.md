@@ -34,6 +34,18 @@ as_processpluginevents  | Processes server side Angelscript plugins's events.   
 
 ## Global Properties
 ```cpp
+const string AMMO_TYPE_1911;
+const string AMMO_TYPE_9MM;
+const string AMMO_TYPE_SHOTGUN;
+const string AMMO_TYPE_RIFLE;
+const string AMMO_TYPE_CROSSBOW;
+const string AMMO_TYPE_SNIPER;
+const string AMMO_TYPE_FLAME;
+const string AMMO_TYPE_GRENADE;
+const string AMMO_TYPE_45ACP;
+const string AMMO_TYPE_50AE;
+const string AMMO_TYPE_MINIGUN;
+
 int TEAM_ANY;
 int TEAM_INVALID;				// Same as TEAM_ANY
 int TEAM_SPECTATOR;
@@ -99,6 +111,7 @@ int SURVIVOR_CURTIS;			// Survivor ID: 10
 int SURVIVOR_YUMI;				// Survivor ID: 11
 int SURVIVOR_MIKE;				// Survivor ID: 12
 int SURVIVOR_DIEGO;				// Survivor ID: 13
+int SURVIVOR_ELIJAH;			// Survivor ID: 14
 
 int FCAP_IMPULSE_USE;			// can be used by the player
 int FCAP_CONTINUOUS_USE;		// can be used by the player
